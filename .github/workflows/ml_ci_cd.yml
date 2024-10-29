@@ -14,13 +14,14 @@ jobs:
     - name: show python version
       run: python --version
     - name: pip install
-      run: pip install -r requirements.txt    - name: train model
+      run: pip install -r requirements.txt
+    - name: train model
       run: python model/train.py
     - name: docker build
       run: docker build -t ${{secrets.DOCKER_USER}}/${{secrets.MODEL_NAME}}:${{github.event.client_payload.sha}} .
     - name: show images
       run: docker images
-          - name: docker login
+    - name: docker login
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
